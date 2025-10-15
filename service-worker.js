@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kbdb-plan-v1';
+const CACHE_NAME = 'kbdb-plan-v3';
 const ASSETS = [
   './',
   './index.html',
