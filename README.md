@@ -1,1 +1,1 @@
-KB/DB Plan v3.3 — Added core finishers to Days 2, 4, 5; optional on Day 1. Cache: kbdb-plan-v3-3.\n
+KB/DB Plan v3.3.1 — Fix: removed duplicate `activeDay` declaration. Cache bumped to kbdb-plan-v3-3-1.\n
