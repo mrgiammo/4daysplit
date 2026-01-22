@@ -1,1 +1,1 @@
-KB/DB Plan v3.3.1 — Fix: removed duplicate `activeDay` declaration. Cache bumped to kbdb-plan-v3-3-1.\n
+KB/DB Plan v3.3.2 — Fix: added tab click handlers. Cache bumped to kbdb-plan-v3-3-2.\n

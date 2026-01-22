@@ -6,7 +6,7 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#1e90ff">
-<title>KB/DB Plan v3.3.1</title>
+<title>KB/DB Plan v3.3.2</title>
 <style>
   :root { --bg:#0b1220; --card:#11182a; --muted:#7d8aa5; --text:#eaf2ff; --accent:#1e90ff; --accent-2:#37d67a; --danger:#ff4757; --shadow:0 10px 25px rgba(0,0,0,.25); --radius:16px;}
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -16,7 +16,7 @@
   .row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
   .sub{color:var(--muted);font-size:12px}
   .tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}
-  .tab{text-align:center;padding:8px 6px;background:var(--card);border-radius:12px;border:1px solid transparent;box-shadow:var(--shadow);font-size:12px}
+  .tab{text-align:center;padding:8px 6px;background:var(--card);border-radius:12px;border:1px solid transparent;box-shadow:var(--shadow);font-size:12px;cursor:pointer}
   .tab.active{border-color:var(--accent)}
   .container{padding:12px 4px 92px}
   .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;margin-bottom:14px}
@@ -44,7 +44,7 @@
 <body>
 <header>
   <div class="row">
-    <h1>KB/DB Plan v3.3.1</h1>
+    <h1>KB/DB Plan v3.3.2</h1>
     <div class="inline">
       <span class="small">Week</span>
       <select id="weekSelect"></select>
@@ -137,9 +137,12 @@ document.querySelector("#prevWeek").addEventListener("click", ()=>{ const w=Math
 document.querySelector("#nextWeek").addEventListener("click", ()=>{ const w=Math.min(8, getWeek()+1); weekSelect.value=w; setWeek(w); renderDay(activeDay); });
 weekSelect.addEventListener("change", ()=>{ setWeek(parseInt(weekSelect.value,10)); renderDay(activeDay); });
 
-// Single declaration of activeDay
+// Single declaration of activeDay + TAB CLICK HANDLERS (FIXED)
 let activeDay = parseInt(localStorage.getItem("kbdb_activeDay") || "1", 10);
-tabs.forEach(t => t.classList.toggle("active", parseInt(t.dataset.day,10) === activeDay));
+tabs.forEach(t => {
+  t.classList.toggle("active", parseInt(t.dataset.day,10) === activeDay);
+  t.addEventListener("click", () => renderDay(parseInt(t.dataset.day,10)));
+});
 
 function ytLink(name){ const q = encodeURIComponent(name + " exercise form"); return `https://www.youtube.com/results?search_query=${q}`; }
 function exrxLink(name){ const q = encodeURIComponent(name + " exercise"); return `https://www.google.com/search?q=exrx+${q}`; }
