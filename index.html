@@ -6,49 +6,45 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#1e90ff">
-<title>KB/DB Plan v3</title>
+<title>KB/DB Plan v3.3</title>
 <style>
-  :root {
-    --bg: #0b1220; --card: #11182a; --muted: #7d8aa5; --text: #eaf2ff;
-    --accent: #1e90ff; --accent-2: #37d67a; --danger: #ff4757;
-    --shadow: 0 10px 25px rgba(0,0,0,.25); --radius: 16px;
-  }
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  body { margin: 0; padding: env(safe-area-inset-top) 12px env(safe-area-inset-bottom); background: var(--bg); color: var(--text); font-family: -apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
-  header { position: sticky; top: 0; backdrop-filter: blur(10px); background: linear-gradient(180deg, rgba(11,18,32,.85) 0%, rgba(11,18,32,.65) 100%); padding: 12px 8px; z-index: 10; }
-  h1 { margin: 0; font-size: 20px; }
-  .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
-  .sub { color: var(--muted); font-size: 12px; }
-  .tabs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 10px; }
-  .tab { text-align: center; padding: 8px 6px; background: var(--card); border-radius: 12px; border: 1px solid transparent; box-shadow: var(--shadow); font-size: 12px; }
-  .tab.active { border-color: var(--accent); }
-  .container { padding: 12px 4px 92px; }
-  .card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px; margin-bottom: 14px; }
-  .exercise { display: grid; grid-template-columns: 26px 1fr auto; align-items: center; gap: 10px; padding: 10px 8px; border-radius: 12px; }
-  .exercise:hover { background: rgba(255,255,255,.03); }
-  .exercise input[type="checkbox"]{ width: 20px; height: 20px; }
-  .name { font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .links a { color: #9fd1ff; text-decoration: none; font-size: 12px; }
-  .links a + a { margin-left: 8px; }
-  .notes { color: var(--muted); font-size: 12px; }
-  .inline { display: flex; gap: 8px; align-items: center; }
-  .small { font-size: 12px; color: var(--muted); }
-  .controls { position: fixed; bottom: 10px; left: 0; right: 0; padding: 12px; }
-  .bar { display: flex; gap: 10px; background: var(--card); border-radius: 18px; padding: 12px; box-shadow: var(--shadow); }
-  button { flex: 1; border: 0; border-radius: 12px; padding: 12px; font-weight: 700; background: var(--accent); color: white; box-shadow: var(--shadow); }
-  button.secondary { background: #26314a; color: var(--text); }
-  button.danger { background: var(--danger); }
-  select, input[type="number"] { background: #0d1526; color: var(--text); border: 1px solid #223052; border-radius: 10px; padding: 8px; }
-  input[type="number"]{ width: 50px; }
-  .timer { text-align: center; padding: 10px; color: var(--accent-2); font-weight: 700; }
-  .badge { padding: 2px 8px; background: #0d2a48; color: #9fd1ff; border-radius: 999px; font-size: 11px; }
-  footer { text-align:center; color: var(--muted); font-size: 12px; padding: 24px 0; }
+  :root { --bg:#0b1220; --card:#11182a; --muted:#7d8aa5; --text:#eaf2ff; --accent:#1e90ff; --accent-2:#37d67a; --danger:#ff4757; --shadow:0 10px 25px rgba(0,0,0,.25); --radius:16px;}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;padding:env(safe-area-inset-top) 12px env(safe-area-inset-bottom);background:var(--bg);color:var(--text);font-family:-apple-system,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  header{position:sticky;top:0;backdrop-filter:blur(10px);background:linear-gradient(180deg,rgba(11,18,32,.85) 0%,rgba(11,18,32,.65) 100%);padding:12px 8px;z-index:10}
+  h1{margin:0;font-size:20px}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
+  .sub{color:var(--muted);font-size:12px}
+  .tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}
+  .tab{text-align:center;padding:8px 6px;background:var(--card);border-radius:12px;border:1px solid transparent;box-shadow:var(--shadow);font-size:12px}
+  .tab.active{border-color:var(--accent)}
+  .container{padding:12px 4px 92px}
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;margin-bottom:14px}
+  .exercise{display:grid;grid-template-columns:26px 1fr auto;align-items:center;gap:10px;padding:10px 8px;border-radius:12px}
+  .exercise:hover{background:rgba(255,255,255,.03)}
+  .exercise input[type="checkbox"]{width:20px;height:20px}
+  .name{font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .links a{color:#9fd1ff;text-decoration:none;font-size:12px}
+  .links a + a{margin-left:8px}
+  .notes{color:var(--muted);font-size:12px}
+  .inline{display:flex;gap:8px;align-items:center}
+  .small{font-size:12px;color:var(--muted)}
+  .controls{position:fixed;bottom:10px;left:0;right:0;padding:12px}
+  .bar{display:flex;gap:10px;background:var(--card);border-radius:18px;padding:12px;box-shadow:var(--shadow)}
+  button{flex:1;border:0;border-radius:12px;padding:12px;font-weight:700;background:var(--accent);color:white;box-shadow:var(--shadow)}
+  button.secondary{background:#26314a;color:var(--text)}
+  button.danger{background:#ff4757}
+  select,input[type="number"]{background:#0d1526;color:#eaf2ff;border:1px solid #223052;border-radius:10px;padding:8px}
+  input[type="number"]{width:50px}
+  .timer{text-align:center;padding:10px;color:var(--accent-2);font-weight:700}
+  .badge{padding:2px 8px;background:#0d2a48;color:#9fd1ff;border-radius:999px;font-size:11px}
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:24px 0}
 </style>
 </head>
 <body>
 <header>
   <div class="row">
-    <h1>KB/DB Plan v3</h1>
+    <h1>KB/DB Plan v3.3</h1>
     <div class="inline">
       <span class="small">Week</span>
       <select id="weekSelect"></select>
@@ -56,13 +52,13 @@
       <button id="nextWeek" class="secondary" style="flex:0 0 auto;padding:8px 10px">▶︎</button>
     </div>
   </div>
-  <div class="sub">Cable • Machines • Barbell • DB/KB — Add reps weekly, then bump weight.</div>
+  <div class="sub">Upper/Lower/Rest/Pull/Upper+ • Now with core finishers on multiple days.</div>
   <div class="tabs">
     <div class="tab" data-day="1">Day 1<br><span class="small">Push</span></div>
-    <div class="tab" data-day="2">Day 2<br><span class="small">Lower</span></div>
+    <div class="tab" data-day="2">Day 2<br><span class="small">Lower + Core</span></div>
     <div class="tab" data-day="3">Day 3<br><span class="small">Rest</span></div>
-    <div class="tab" data-day="4">Day 4<br><span class="small">Pull</span></div>
-    <div class="tab" data-day="5">Day 5<br><span class="small">Full</span></div>
+    <div class="tab" data-day="4">Day 4<br><span class="small">Pull + Core</span></div>
+    <div class="tab" data-day="5">Day 5<br><span class="small">Upper+ + Core</span></div>
   </div>
 </header>
 
@@ -77,9 +73,7 @@
   <div class="timer" id="timerDisplay"></div>
 </div>
 
-<footer>
-  <div>Tip: Use RIR 1–2. Progress is tracked per-week and saved offline.</div>
-</footer>
+<footer><div>Tip: Core finishers 8–12 min. Stay tight, breathe behind the brace.</div></footer>
 
 <script>
 const PLAN = {
@@ -89,7 +83,8 @@ const PLAN = {
     { name: "Chest Press Machine", sets: 3, reps: "10–12", note: "Controlled tempo", id: "chest_machine" },
     { name: "Cable Lateral Raise", sets: 3, reps: "12–15", note: "Constant tension", id: "cable_lat_raise" },
     { name: "Cable Triceps Pushdown", sets: 3, reps: "12–15", note: "Full lockout", id: "tri_pushdown" },
-    { name: "Cable Fly (Low→High)", sets: 2, reps: "12–15", note: "Squeeze at top", id: "cable_fly" }
+    { name: "Cable Fly (Low→High)", sets: 2, reps: "12–15", note: "Squeeze at top", id: "cable_fly" },
+    { name: "Dead Bug (bodyweight)", sets: 2, reps: "8–10/side", note: "Ribs down, slow", id: "dead_bug" }
   ],
   2: [
     { name: "Goblet Squat (KB/DB)", sets: 4, reps: "8–12", note: "Depth + upright chest", id: "goblet_squat" },
@@ -97,7 +92,9 @@ const PLAN = {
     { name: "Leg Extension Machine", sets: 3, reps: "12–15", note: "Pause at peak", id: "leg_extension" },
     { name: "KB Swing", sets: 3, reps: "15–20", note: "Explosive hips", id: "kb_swing" },
     { name: "Hip Thrust / Glute Bridge (BB or DB)", sets: 3, reps: "10–15", note: "2s squeeze at top", id: "hip_thrust" },
-    { name: "Standing Calf Raise (DB)", sets: 3, reps: "15–20", note: "Slow eccentric", id: "calf_raise" }
+    { name: "Standing Calf Raise (DB)", sets: 3, reps: "15–20", note: "Slow eccentric", id: "calf_raise" },
+    { name: "Hanging Knee Raise (pull-up bar)", sets: 3, reps: "8–12", note: "Posterior tilt at top", id: "hkr" },
+    { name: "Cable Pallof Press", sets: 3, reps: "12/side", note: "Anti-rotation", id: "pallof" }
   ],
   3: [
     { name: "Active Recovery", sets: 1, reps: "30–45 min", note: "Walk, mobility, or yoga", id: "recovery" }
@@ -108,15 +105,16 @@ const PLAN = {
     { name: "Barbell Bent-Over Row", sets: 3, reps: "6–10", note: "From floor or hang", id: "bb_row" },
     { name: "Cable Face Pull", sets: 3, reps: "12–15", note: "High elbows, scap squeeze", id: "face_pull" },
     { name: "Hammer Curl (DB) or Cable Curl", sets: 3, reps: "10–12", note: "Full ROM", id: "curl" },
-    { name: "Side Plank (each side)", sets: 3, reps: "30–45s", note: "Obliques & stability", id: "side_plank" }
+    { name: "Ab-Wheel (or RKC Plank 20–30s)", sets: 3, reps: "6–10", note: "Neutral spine", id: "ab_wheel" }
   ],
   5: [
-    { name: "Barbell Deadlift (or Heavy KB DL)", sets: 4, reps: "3–5", note: "Strength focus, perfect form", id: "bb_dl" },
-    { name: "Incline Press Machine (pump set)", sets: 3, reps: "12", note: "Controlled, near-failure", id: "incline_pump" },
-    { name: "Bulgarian Split Squat (DB)", sets: 3, reps: "10/leg", note: "Vertical shin, balanced", id: "bss" },
-    { name: "Cable Woodchop / Pallof Press", sets: 3, reps: "12/side", note: "Anti-rotation core", id: "pallof" },
-    { name: "Farmer’s Carry (KB/DB)", sets: 3, reps: "30–45s walk", note: "Core + grip", id: "farmers" },
-    { name: "Finisher: Mountain Climbers", sets: 3, reps: "30–45s", note: "Keep hips low", id: "finish_mc" }
+    { name: "Chest Press Machine", sets: 3, reps: "10–12", note: "Controlled tempo", id: "chest_machine_acc" },
+    { name: "Cable Fly (Low→High)", sets: 2, reps: "12–15", note: "Squeeze at top", id: "cable_fly_lowhigh" },
+    { name: "Lat Pulldown (wide or neutral)", sets: 3, reps: "10–12", note: "Elbows to ribs", id: "pulldown_acc" },
+    { name: "1-Arm Dumbbell Row (strict)", sets: 2, reps: "10–12/side", note: "No torso twist", id: "db_row_strict" },
+    { name: "DB Lateral Raise", sets: 3, reps: "15–25", note: "Last 5 as partials if needed", id: "lat_raise_highrep" },
+    { name: "Superset: Cable Triceps Pushdown + DB Hammer Curl", sets: 2, reps: "12–15 each", note: "Alt with minimal rest", id: "tri_push_curl_ss" },
+    { name: "Cable Woodchop (high→low)", sets: 3, reps: "10–12/side", note: "Rotate from trunk", id: "woodchop" }
   ]
 };
 
@@ -125,14 +123,13 @@ const $ = s => document.querySelector(s);
 const content = $("#content");
 const tabs = [...document.querySelectorAll(".tab")];
 
-// Week state (1-8)
 function getWeek(){ return parseInt(localStorage.getItem("kbdb_week") || "1", 10); }
 function setWeek(w){ localStorage.setItem("kbdb_week", String(w)); }
-function key(k){ return `kbdb_w${getWeek()}_${k}`; } // namespaced by week!
+function key(k){ return `kbdb_w${getWeek()}_${k}`; }
 function get(k, def=null){ try{ return JSON.parse(localStorage.getItem(key(k))) ?? def; } catch { return def; } }
 function set(k, v){ localStorage.setItem(key(k), JSON.stringify(v)); }
 
-// Build week select
+// Week select
 const weekSelect = document.querySelector("#weekSelect");
 for(let i=1;i<=8;i++){ const o=document.createElement("option"); o.value=i; o.textContent=`W${i}`; weekSelect.appendChild(o); }
 weekSelect.value = getWeek();
@@ -143,14 +140,8 @@ weekSelect.addEventListener("change", ()=>{ setWeek(parseInt(weekSelect.value,10
 let activeDay = parseInt(localStorage.getItem("kbdb_activeDay") || "1", 10);
 tabs.forEach(t => t.classList.toggle("active", parseInt(t.dataset.day,10) === activeDay));
 
-function ytLink(name){
-  const q = encodeURIComponent(name + " exercise form");
-  return `https://www.youtube.com/results?search_query=${q}`;
-}
-function exrxLink(name){
-  const q = encodeURIComponent(name + " exercise");
-  return `https://www.google.com/search?q=exrx+${q}`;
-}
+function ytLink(name){ const q = encodeURIComponent(name + " exercise form"); return `https://www.youtube.com/results?search_query=${q}`; }
+function exrxLink(name){ const q = encodeURIComponent(name + " exercise"); return `https://www.google.com/search?q=exrx+${q}`; }
 
 function renderDay(day){
   activeDay = day;
@@ -158,30 +149,23 @@ function renderDay(day){
   tabs.forEach(t => t.classList.toggle("active", parseInt(t.dataset.day,10) === day));
   content.innerHTML = "";
   const list = PLAN[day] || [];
-  const card = document.createElement("div");
-  card.className = "card";
+  const card = document.createElement("div"); card.className = "card";
 
-  const title = document.createElement("div");
-  title.className = "inline";
+  const title = document.createElement("div"); title.className = "inline";
   title.innerHTML = `<span class="badge">Day ${day} • Week ${getWeek()}</span><h2 style="margin:0;font-size:18px">Workout</h2>`;
   card.appendChild(title);
 
   list.forEach((ex, idx) => {
-    const row = document.createElement("div");
-    row.className = "exercise";
-
-    const chk = document.createElement("input");
-    chk.type = "checkbox";
-    const chkKey = `chk_${day}_${ex.id}_${idx}`;
-    chk.checked = !!get(chkKey, false);
+    const row = document.createElement("div"); row.className = "exercise";
+    const chk = document.createElement("input"); chk.type = "checkbox";
+    const chkKey = `chk_${day}_${ex.id}_${idx}`; chk.checked = !!get(chkKey, false);
     chk.addEventListener("change", () => set(chkKey, chk.checked));
 
     const detail = document.createElement("div");
     const name = document.createElement("div"); name.className = "name";
     const links = document.createElement("span"); links.className = "links";
-    links.innerHTML = `<a href="${ytLink(ex.name)}" target="_blank" rel="noopener">How‑to ▶︎</a><a href="${exrxLink(ex.name)}" target="_blank" rel="noopener">Form 📘</a>`;
-    name.textContent = ex.name + " ";
-    name.appendChild(links);
+    links.innerHTML = `<a href="${ytLink(ex.name)}" target="_blank" rel="noopener">How-to ▶︎</a><a href="${exrxLink(ex.name)}" target="_blank" rel="noopener">Form 📘</a>`;
+    name.textContent = ex.name + " "; name.appendChild(links);
     const notes = document.createElement("div"); notes.className = "notes"; notes.textContent = `${ex.sets} sets × ${ex.reps} • ${ex.note}`;
     detail.appendChild(name); detail.appendChild(notes);
 
@@ -194,52 +178,38 @@ function renderDay(day){
     card.appendChild(row);
   });
 
-  const tips = document.createElement("div");
-  tips.className = "card";
-  tips.innerHTML = `
-    <div class="inline" style="justify-content:space-between;">
-      <div><strong>Week ${getWeek()} Focus</strong><div class="small">Stay ~1–2 RIR. Add reps each week; when you hit the top of the range, increase weight next week.</div></div>
-      <div class="badge">Progression</div>
-    </div>
-    <div class="small" style="margin-top:6px;">
-      Your weights/reps/checkboxes are saved per-week (W1–W8). Resetting clears only the current week.
-    </div>`;
+  const tips = document.createElement("div"); tips.className = "card";
+  tips.innerHTML = `<div class="inline" style="justify-content:space-between;">
+      <div><strong>Week ${getWeek()} Focus</strong><div class="small">Core finishers 8–12 min. Control the eccentric, breathe behind the brace.</div></div>
+      <div class="badge">Core</div></div>
+      <div class="small" style="margin-top:6px;">Saved per-week (W1–W8). Reset clears only current week.</div>`;
   content.appendChild(card); content.appendChild(tips);
 }
 
-tabs.forEach(t => t.addEventListener("click", () => renderDay(parseInt(t.dataset.day,10))));
-
-// Timer
+// Timer & resets
 let timerId = null, remaining = 90;
-function fmt(s){ const m = Math.floor(s/60), sec = (s%60).toString().padStart(2,'0'); return `${m}:${sec}`; }
+function fmt(s){ const m=Math.floor(s/60), sec=(s%60).toString().padStart(2,'0'); return `${m}:${sec}`; }
 function updateTimer(){ document.querySelector("#timerDisplay").textContent = remaining>0 ? `Rest: ${fmt(remaining)}` : "Done!"; }
 document.querySelector("#startTimer").addEventListener("click", () => {
   if(timerId){ clearInterval(timerId); timerId = null; remaining = 90; updateTimer(); return; }
   remaining = parseInt(prompt("Rest seconds?", localStorage.getItem("kbdb_restSec") || "90") || "90", 10);
   localStorage.setItem("kbdb_restSec", remaining);
   updateTimer();
-  timerId = setInterval(() => {
-    remaining--; updateTimer();
-    if(remaining <= 0){ clearInterval(timerId); timerId = null; }
-  }, 1000);
+  timerId = setInterval(() => { remaining--; updateTimer(); if(remaining <= 0){ clearInterval(timerId); timerId = null; } }, 1000);
 });
-
-// Resets (week-scoped)
 document.querySelector("#resetChecks").addEventListener("click", () => {
   if(!confirm("Reset all checkboxes for this day (current week only)?")) return;
-  const list = PLAN[activeDay] || [];
-  list.forEach((ex, idx) => localStorage.removeItem(`kbdb_w${getWeek()}_chk_${activeDay}_${ex.id}_${idx}`));
-  renderDay(activeDay);
+  const list = PLAN[activeDay] || []; list.forEach((ex, idx) => localStorage.removeItem(`kbdb_w${getWeek()}_chk_${activeDay}_${ex.id}_${idx}`)); renderDay(activeDay);
 });
 document.querySelector("#resetAll").addEventListener("click", () => {
   if(!confirm("Reset this entire week (all weights, reps, checks)?")) return;
-  Object.keys(localStorage).filter(k => k.startsWith(`kbdb_w${getWeek()}_`)).forEach(k => localStorage.removeItem(k));
-  renderDay(1);
+  Object.keys(localStorage).filter(k => k.startsWith(`kbdb_w${getWeek()}_`)).forEach(k => localStorage.removeItem(k)); renderDay(1);
 });
 
 // Init
+let activeDay = parseInt(localStorage.getItem("kbdb_activeDay") || "1", 10);
+tabs.forEach(t => t.classList.toggle("active", parseInt(t.dataset.day,10) === activeDay));
 renderDay(activeDay);
-// SW
 if('serviceWorker' in navigator){ window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js')); }
 </script>
 </body>

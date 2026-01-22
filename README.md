@@ -1,3 +1,1 @@
-# KB/DB Training Plan v3.1 — Hostable PWA (Bug fix)
-- Fix: removed duplicate `activeDay` declaration that could break rendering
-- Cache bump: `kbdb-plan-v3-1`
+KB/DB Plan v3.3 — Added core finishers to Days 2, 4, 5; optional on Day 1. Cache: kbdb-plan-v3-3.\n
