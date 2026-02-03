@@ -6,7 +6,7 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#1e90ff">
-<title>KB/DB Plan v3.3.2</title>
+<title>KB/DB Plan v3.3.3</title>
 <style>
   :root { --bg:#0b1220; --card:#11182a; --muted:#7d8aa5; --text:#eaf2ff; --accent:#1e90ff; --accent-2:#37d67a; --danger:#ff4757; --shadow:0 10px 25px rgba(0,0,0,.25); --radius:16px;}
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -44,7 +44,7 @@
 <body>
 <header>
   <div class="row">
-    <h1>KB/DB Plan v3.3.2</h1>
+    <h1>KB/DB Plan v3.3.3</h1>
     <div class="inline">
       <span class="small">Week</span>
       <select id="weekSelect"></select>
@@ -104,12 +104,12 @@ const PLAN = {
     { name: "Cable Seated Row (or 1-Arm DB Row)", sets: 3, reps: "10–12", note: "Neutral spine", id: "cable_row" },
     { name: "Barbell Bent-Over Row", sets: 3, reps: "6–10", note: "From floor or hang", id: "bb_row" },
     { name: "Cable Face Pull", sets: 3, reps: "12–15", note: "High elbows, scap squeeze", id: "face_pull" },
-    { name: "Hammer Curl (DB) or Cable Curl", sets: 3, reps: "10–12", note: "Full ROM", id: "curl" },
+    { name: "Hammer Curl (DB) or Cable Curl)", sets: 3, reps: "10–12", note: "Full ROM", id: "curl" },
     { name: "Ab-Wheel (or RKC Plank 20–30s)", sets: 3, reps: "6–10", note: "Neutral spine", id: "ab_wheel" }
   ],
   5: [
     { name: "Chest Press Machine", sets: 3, reps: "10–12", note: "Controlled tempo", id: "chest_machine_acc" },
-    { name: "Cable Fly (Low→High)", sets: 2, reps: "12–15", note: "Squeeze at top", id: "cable_fly_lowhigh" },
+    { name: "Cable Fly (Low–High)", sets: 2, reps: "12–15", note: "Squeeze at top", id: "cable_fly_lowhigh" },
     { name: "Lat Pulldown (wide or neutral)", sets: 3, reps: "10–12", note: "Elbows to ribs", id: "pulldown_acc" },
     { name: "1-Arm Dumbbell Row (strict)", sets: 2, reps: "10–12/side", note: "No torso twist", id: "db_row_strict" },
     { name: "DB Lateral Raise", sets: 3, reps: "15–25", note: "Last 5 as partials if needed", id: "lat_raise_highrep" },
@@ -137,12 +137,36 @@ document.querySelector("#prevWeek").addEventListener("click", ()=>{ const w=Math
 document.querySelector("#nextWeek").addEventListener("click", ()=>{ const w=Math.min(8, getWeek()+1); weekSelect.value=w; setWeek(w); renderDay(activeDay); });
 weekSelect.addEventListener("change", ()=>{ setWeek(parseInt(weekSelect.value,10)); renderDay(activeDay); });
 
-// Single declaration of activeDay + TAB CLICK HANDLERS (FIXED)
+// Single declaration of activeDay + TAB CLICK & TOUCH HANDLERS + SWIPE
 let activeDay = parseInt(localStorage.getItem("kbdb_activeDay") || "1", 10);
 tabs.forEach(t => {
-  t.classList.toggle("active", parseInt(t.dataset.day,10) === activeDay);
-  t.addEventListener("click", () => renderDay(parseInt(t.dataset.day,10)));
+  const day = parseInt(t.dataset.day, 10);
+  t.classList.toggle("active", day === activeDay);
+  t.style.cursor = "pointer";
+  t.setAttribute("role", "button");
+  t.setAttribute("tabindex", "0");
+  const go = () => renderDay(day);
+  t.addEventListener("click", go);
+  t.addEventListener("touchend", go, { passive: true });
 });
+
+// Swipe detection
+let touchX = null;
+window.addEventListener("touchstart", e => {
+  touchX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : null;
+}, { passive: true });
+
+window.addEventListener("touchend", e => {
+  if (touchX == null) return;
+  const x2 = e.changedTouches[0].clientX;
+  const dx = x2 - touchX;
+  if (Math.abs(dx) > 50) {
+    const dir = dx < 0 ? 1 : -1; // left swipe = next day
+    const next = ((activeDay - 1 + dir + 5) % 5) + 1; // days 1..5
+    renderDay(next);
+  }
+  touchX = null;
+}, { passive: true });
 
 function ytLink(name){ const q = encodeURIComponent(name + " exercise form"); return `https://www.youtube.com/results?search_query=${q}`; }
 function exrxLink(name){ const q = encodeURIComponent(name + " exercise"); return `https://www.google.com/search?q=exrx+${q}`; }
@@ -190,25 +214,16 @@ function renderDay(day){
   content.appendChild(card); content.appendChild(tips);
 }
 
-// Timer & resets
-let timerId = null, remaining = 90;
-function fmt(s){ const m=Math.floor(s/60), sec=(s%60).toString().padStart(2,'0'); return `${m}:${sec}`; }
-function updateTimer(){ document.querySelector("#timerDisplay").textContent = remaining>0 ? `Rest: ${fmt(remaining)}` : "Done!"; }
-document.querySelector("#startTimer").addEventListener("click", () => {
-  if(timerId){ clearInterval(timerId); timerId = null; remaining = 90; updateTimer(); return; }
-  remaining = parseInt(prompt("Rest seconds?", localStorage.getItem("kbdb_restSec") || "90") || "90", 10);
-  localStorage.setItem("kbdb_restSec", remaining);
-  updateTimer();
-  timerId = setInterval(() => { remaining--; updateTimer(); if(remaining <= 0){ clearInterval(timerId); timerId = null; } }, 1000);
-});
-document.querySelector("#resetChecks").addEventListener("click", () => {
-  if(!confirm("Reset all checkboxes for this day (current week only)?")) return;
-  const list = PLAN[activeDay] || []; list.forEach((ex, idx) => localStorage.removeItem(`kbdb_w${getWeek()}_chk_${activeDay}_${ex.id}_${idx}`)); renderDay(activeDay);
-});
-document.querySelector("#resetAll").addEventListener("click", () => {
-  if(!confirm("Reset this entire week (all weights, reps, checks)?")) return;
-  Object.keys(localStorage).filter(k => k.startsWith(`kbdb_w${getWeek()}_`)).forEach(k => localStorage.removeItem(k)); renderDay(1);
-});
+// Optional: error overlay (enabled by default)
+const SHOW_ERRORS = true;
+if (SHOW_ERRORS) {
+  window.addEventListener("error", function(e){
+    const box = document.createElement("div");
+    box.style.cssText = "position:fixed;bottom:0;left:0;right:0;background:#300;padding:10px;color:#fff;font:12px/1.4 -apple-system,system-ui;z-index:99999";
+    box.textContent = "JS Error: " + (e.message || e.error);
+    document.body.appendChild(box);
+  });
+}
 
 // Init
 renderDay(activeDay);

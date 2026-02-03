@@ -1,1 +1,1 @@
-KB/DB Plan v3.3.2 — Fix: added tab click handlers. Cache bumped to kbdb-plan-v3-3-2.\n
+KB/DB Plan v3.3.3 — iOS touch+swipe nav, error overlay, cache bump to kbdb-plan-v3-3-3.\n
